@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/restaurant_image_desc" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/image"
+        android:textAppearance="?attr/textAppearanceSearchResultTitle"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_alignStart="@id/name"
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        tools:text="Chinese, Soup" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_alignBaseline="@id/image"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="22min" />
+
+</RelativeLayout>
