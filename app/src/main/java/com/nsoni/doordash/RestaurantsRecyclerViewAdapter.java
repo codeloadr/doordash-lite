@@ -3,6 +3,7 @@ package com.nsoni.doordash;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -91,6 +92,14 @@ public class RestaurantsRecyclerViewAdapter
 
             holder.itemView.setTag(restaurant);
             holder.itemView.setOnClickListener(mOnClickListener);
+
+
+            String favKey = restaurant.getBusiness().getName().replace(" ", "-");
+            if (Favorites.isFavorite(holder.itemView.getContext(), favKey)) {
+                restaurantViewHolder.mFavBtn.setImageDrawable(holder.itemView.getContext().getDrawable(android.R.drawable.btn_star_big_on));
+            } else {
+                restaurantViewHolder.mFavBtn.setImageDrawable(holder.itemView.getContext().getDrawable(android.R.drawable.btn_star_big_off));
+            }
         }
     }
 
@@ -113,6 +122,7 @@ public class RestaurantsRecyclerViewAdapter
         final TextView mName;
         final TextView mDesc;
         final TextView mTime;
+        final ImageView mFavBtn;
 
         RestaurantViewHolder(View view) {
             super(view);
@@ -120,6 +130,19 @@ public class RestaurantsRecyclerViewAdapter
             mName = view.findViewById(R.id.name);
             mDesc = view.findViewById(R.id.desc);
             mTime = view.findViewById(R.id.time);
+            mFavBtn = view.findViewById(R.id.fav);
+            mFavBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String favKey = mName.getText().toString().replace(" ", "-");
+                    Favorites.toggleFav(v.getContext(), favKey);
+                    if (Favorites.isFavorite(v.getContext(), favKey)) {
+                        mFavBtn.setImageDrawable(v.getContext().getDrawable(android.R.drawable.btn_star_big_on));
+                    } else {
+                        mFavBtn.setImageDrawable(v.getContext().getDrawable(android.R.drawable.btn_star_big_off));
+                    }
+                }
+            });
         }
     }
 
